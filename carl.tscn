@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cti3ucywnp0fo"]
+
+[ext_resource type="Script" path="res://carl.gd" id="1_kql7p"]
+[ext_resource type="Texture2D" uid="uid://dhef760e45gvw" path="res://icon.svg" id="2_gaane"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2gtdf"]
+radius = 59.0
+height = 180.0
+
+[node name="Carl" type="CharacterBody2D"]
+script = ExtResource("1_kql7p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_2gtdf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_gaane")
