@@ -1,11 +1,12 @@
-[gd_scene load_steps=19 format=4 uid="uid://d1otxnlo5omjj"]
+[gd_scene load_steps=20 format=4 uid="uid://d1otxnlo5omjj"]
 
 [ext_resource type="PackedScene" uid="uid://cti3ucywnp0fo" path="res://carl.tscn" id="1_3c43k"]
-[ext_resource type="Texture2D" uid="uid://b6jm8laltqdux" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetFloor.png" id="1_to8xh"]
-[ext_resource type="Texture2D" uid="uid://3jalrgldisfo" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetField.png" id="2_o02by"]
-[ext_resource type="Texture2D" uid="uid://cp77d844m3uep" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetWater.png" id="3_p1084"]
-[ext_resource type="Texture2D" uid="uid://c10mu3ogmo6m7" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetNature.png" id="4_uhevc"]
-[ext_resource type="Texture2D" uid="uid://mfmtysqn00hb" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetElement.png" id="5_86ab0"]
+[ext_resource type="Texture2D" uid="uid://b6jm8laltqdux" path="res://Assets (maybe)/Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetFloor.png" id="1_to8xh"]
+[ext_resource type="Texture2D" uid="uid://3jalrgldisfo" path="res://Assets (maybe)/Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetField.png" id="2_o02by"]
+[ext_resource type="Texture2D" uid="uid://cp77d844m3uep" path="res://Assets (maybe)/Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetWater.png" id="3_p1084"]
+[ext_resource type="Texture2D" uid="uid://c10mu3ogmo6m7" path="res://Assets (maybe)/Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetNature.png" id="4_uhevc"]
+[ext_resource type="Texture2D" uid="uid://mfmtysqn00hb" path="res://Assets (maybe)/Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetElement.png" id="5_86ab0"]
+[ext_resource type="PackedScene" uid="uid://ce0bn5jqcfygv" path="res://portal.tscn" id="7_dhmpn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5mrlu"]
 texture = ExtResource("1_to8xh")
@@ -2741,3 +2742,9 @@ position = Vector2(516, 277)
 
 [node name="Camera2D" type="Camera2D" parent="Carl"]
 zoom = Vector2(2.5, 2.5)
+
+[node name="Portal" parent="." instance=ExtResource("7_dhmpn")]
+next_scene = "res://2_nd_level.tscn"
+
+[node name="PlayerPortalLocation" type="Marker2D" parent="."]
+position = Vector2(314, 826)
