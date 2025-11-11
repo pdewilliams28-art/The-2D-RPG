@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 SceneManager="*res://SceneManager.gd"
 
+[global_group]
+
+Movable="things that can move"
+
 [input]
 
 move_left={

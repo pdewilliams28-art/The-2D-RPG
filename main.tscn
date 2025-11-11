@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://d1otxnlo5omjj"]
+[gd_scene load_steps=26 format=4 uid="uid://d1otxnlo5omjj"]
 
 [ext_resource type="PackedScene" uid="uid://cti3ucywnp0fo" path="res://carl.tscn" id="1_3c43k"]
 [ext_resource type="Script" path="res://main.gd" id="1_hhnjb"]
@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://c10mu3ogmo6m7" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetNature.png" id="4_uhevc"]
 [ext_resource type="Texture2D" uid="uid://mfmtysqn00hb" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetElement.png" id="5_86ab0"]
 [ext_resource type="PackedScene" uid="uid://ce0bn5jqcfygv" path="res://portal.tscn" id="7_dhmpn"]
+[ext_resource type="PackedScene" uid="uid://dxwhatu6b1sne" path="res://block.tscn" id="9_oox41"]
+[ext_resource type="PackedScene" uid="uid://dfh67sopqhs6i" path="res://puzzle_button.tscn" id="10_b4tau"]
+[ext_resource type="Texture2D" uid="uid://bpe703ct8m53w" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetReliefDetail.png" id="11_xbw4n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5mrlu"]
 texture = ExtResource("1_to8xh")
@@ -2717,6 +2720,12 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_uc1tp")
 sources/1 = SubResource("TileSetAtlasSource_b8lbx")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o10h0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ny88n"]
+atlas = ExtResource("11_xbw4n")
+region = Rect2(32, 0, 16, 16)
+
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_hhnjb")
@@ -2738,7 +2747,7 @@ y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAFAAUAAAACAAAAAAAHAAUAAAACAAAAAAAGAAMAAAACAAAAAAAGAAcAAAACAAAAAAA5AAIAAAAAAAAAAAA6AAIAAAAAAAAAAAA7AAQAAAAAAAAAAAA5AAQAAAAAAAAAAAA4AAYAAAAAAAAAAAA7AAYAAAAAAAAAAAAeAAUAAAAAAAAAAAAfAAUAAAAAAAAAAAAgAAUAAAAAAAAAAAAhAAUAAAAAAAAAAAAiAAUAAAAAAAAAAAAjAAUAAAAAAAAAAAAkAAUAAAAAAAAAAAAlAAUAAAAAAAAAAAAmAAQAAAAAAAAAAAANAAEAAAACAAAAAAAOAAEAAAACAAAAAAAOAAIAAAACAAAAAAAPAAIAAAACAAAAAAAPAAMAAAACAAAAAAAQAAMAAAACAAAAAAARAAMAAAACAAAAAAASAAMAAAACAAAAAAASAAIAAAACAAAAAAATAAIAAAACAAAAAABEABIAAAAQAAgAAABEABMAAAAQAAgAAABEABQAAAAQAAgAAABEABUAAAAQAAgAAABEABYAAAAQAAgAAAAbADsAAAAQAAgAAAAbADwAAAAQAAgAAAAbAD0AAAAQAAgAAAAbAD4AAAAQAAgAAAAcAD4AAAAQAAgAAAAcAD8AAAAQAAgAAAAdAD8AAAAQAAgAAAAeAD8AAAAQAAgAAAAfAD8AAAAQAAgAAAAgAD8AAAAQAAgAAAAhAD8AAAAQAAgAAAAiAD8AAAAQAAgAAAAjAD8AAAAQAAgAAAAkAD8AAAAQAAgAAAAkAD4AAAAQAAgAAAAlAD4AAAAQAAgAAAAmAD4AAAAQAAgAAAAmAD0AAAAQAAgAAAAmADwAAAAQAAgAAAAlADwAAAAQAAgAAAAlADsAAAAQAAgAAAAlADoAAAAQAAgAAAAkADoAAAAQAAgAAAAkADkAAAAQAAgAAAAjADkAAAAQAAgAAAAjADgAAAAQAAgAAAAjADcAAAAQAAgAAAAiADcAAAAQAAgAAAAiADYAAAAQAAgAAAAhADYAAAAQAAgAAAAhADUAAAAQAAgAAAAgADUAAAAQAAgAAAAgADQAAAAQAAgAAAAbADkAAAAQAAgAAAAbADgAAAAQAAgAAAAaADgAAAAQAAgAAAAaADcAAAAQAAgAAAAZADYAAAAQAAgAAAAZADUAAAAQAAgAAAAZADQAAAAQAAgAAAAYADQAAAAQAAgAAAAYADMAAAAQAAgAAAAZADMAAAAQAAgAAAAZADIAAAAQAAgAAAAZADEAAAAQAAgAAAAaADEAAAAQAAgAAAAaADAAAAAQAAgAAAAbADAAAAAQAAgAAAAhADgAAAAQAAgAAAAiADkAAAAQAAgAAAAgADoAAAAQAAgAAAAfADgAAAAQAAgAAAAgADwAAAAQAAgAAAAgADsAAAAQAAgAAAA=")
 tile_set = SubResource("TileSet_bo4p7")
 
-[node name="Carl" parent="." instance=ExtResource("1_3c43k")]
+[node name="Carl" parent="." groups=["Movable"] instance=ExtResource("1_3c43k")]
 y_sort_enabled = true
 position = Vector2(516, 277)
 
@@ -2753,3 +2762,21 @@ player_location = Vector2(324, 535)
 position = Vector2(926, 146)
 
 [node name="PlayerStartLocation" type="Marker2D" parent="."]
+
+[node name="Block" parent="." groups=["Movable"] instance=ExtResource("9_oox41")]
+position = Vector2(656, 518)
+gravity_scale = 0.0
+
+[node name="PuzzleButton" parent="." instance=ExtResource("10_b4tau")]
+position = Vector2(366, 528)
+
+[node name="Portal Door" type="StaticBody2D" parent="."]
+z_index = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal Door"]
+shape = SubResource("RectangleShape2D_o10h0")
+
+[node name="Sprite2D" type="Sprite2D" parent="Portal Door"]
+position = Vector2(524, 990)
+scale = Vector2(1.5625, 2.375)
+texture = SubResource("AtlasTexture_ny88n")

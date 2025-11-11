@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://bjroggncp1nbk" path="res://Ninja Adventure - Asset Pack/Actor/Characters/Boy/SeparateAnim/Walk.png" id="2_sag5e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2gtdf"]
-radius = 9.0
-height = 28.0
+radius = 8.0
+height = 20.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7tvve"]
 atlas = ExtResource("2_sag5e")
@@ -143,9 +143,11 @@ animations = [{
 }]
 
 [node name="Carl" type="CharacterBody2D"]
+z_index = 1
 script = ExtResource("1_kql7p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 0)
 shape = SubResource("CapsuleShape2D_2gtdf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
