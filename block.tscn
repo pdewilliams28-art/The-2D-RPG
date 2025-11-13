@@ -12,7 +12,7 @@ region = Rect2(16, 48, 16, 16)
 [node name="Block" type="RigidBody2D"]
 z_index = 1
 gravity_scale = -8.0
-linear_damp = 10.0
+linear_damp = 3.687
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_m65kf")

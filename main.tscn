@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://d1otxnlo5omjj"]
+[gd_scene load_steps=24 format=4 uid="uid://d1otxnlo5omjj"]
 
 [ext_resource type="PackedScene" uid="uid://cti3ucywnp0fo" path="res://carl.tscn" id="1_3c43k"]
 [ext_resource type="Script" path="res://main.gd" id="1_hhnjb"]
@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ce0bn5jqcfygv" path="res://portal.tscn" id="7_dhmpn"]
 [ext_resource type="PackedScene" uid="uid://dxwhatu6b1sne" path="res://block.tscn" id="9_oox41"]
 [ext_resource type="PackedScene" uid="uid://dfh67sopqhs6i" path="res://puzzle_button.tscn" id="10_b4tau"]
-[ext_resource type="Texture2D" uid="uid://bpe703ct8m53w" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetReliefDetail.png" id="11_xbw4n"]
+[ext_resource type="PackedScene" uid="uid://cp8hkxrj12hnr" path="res://portal_door.tscn" id="11_xirch"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5mrlu"]
 texture = ExtResource("1_to8xh")
@@ -2720,12 +2720,6 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_uc1tp")
 sources/1 = SubResource("TileSetAtlasSource_b8lbx")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o10h0"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ny88n"]
-atlas = ExtResource("11_xbw4n")
-region = Rect2(32, 0, 16, 16)
-
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_hhnjb")
@@ -2770,13 +2764,8 @@ gravity_scale = 0.0
 [node name="PuzzleButton" parent="." instance=ExtResource("10_b4tau")]
 position = Vector2(366, 528)
 
-[node name="Portal Door" type="StaticBody2D" parent="."]
-z_index = 2
+[node name="Portal Door" parent="." instance=ExtResource("11_xirch")]
+position = Vector2(523, 995)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal Door"]
-shape = SubResource("RectangleShape2D_o10h0")
-
-[node name="Sprite2D" type="Sprite2D" parent="Portal Door"]
-position = Vector2(524, 990)
-scale = Vector2(1.5625, 2.375)
-texture = SubResource("AtlasTexture_ny88n")
+[connection signal="pressed" from="PuzzleButton" to="Portal Door" method="_on_puzzle_button_pressed"]
+[connection signal="unpressed" from="PuzzleButton" to="Portal Door" method="_on_puzzle_button_unpressed"]

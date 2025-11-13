@@ -1,9 +1,12 @@
-[gd_scene load_steps=12 format=4 uid="uid://dyj2d04oh332q"]
+[gd_scene load_steps=16 format=4 uid="uid://dyj2d04oh332q"]
 
 [ext_resource type="Texture2D" uid="uid://bw7sj40cptfp7" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetDesert.png" id="1_c3ukl"]
 [ext_resource type="Texture2D" uid="uid://b6jm8laltqdux" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetFloor.png" id="2_yguxe"]
 [ext_resource type="PackedScene" uid="uid://cti3ucywnp0fo" path="res://carl.tscn" id="3_hd5y1"]
 [ext_resource type="PackedScene" uid="uid://ce0bn5jqcfygv" path="res://portal.tscn" id="4_30n2h"]
+[ext_resource type="PackedScene" uid="uid://cp8hkxrj12hnr" path="res://portal_door.tscn" id="5_fo7aw"]
+[ext_resource type="PackedScene" uid="uid://dfh67sopqhs6i" path="res://puzzle_button.tscn" id="6_8bvq6"]
+[ext_resource type="PackedScene" uid="uid://dxwhatu6b1sne" path="res://block.tscn" id="7_twvtw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mfty1"]
 texture = ExtResource("1_c3ukl")
@@ -1464,6 +1467,11 @@ texture = ExtResource("1_c3ukl")
 [sub_resource type="TileSet" id="TileSet_ejqi6"]
 sources/0 = SubResource("TileSetAtlasSource_d6q5f")
 
+[sub_resource type="TileSet" id="TileSet_8xtyv"]
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Terrain 0"
+terrain_set_0/terrain_0/color = Color(0.146228, 0.444911, 0.343893, 1)
+
 [node name="2ndLevel" type="Node2D"]
 y_sort_enabled = true
 
@@ -1479,6 +1487,9 @@ tile_set = SubResource("TileSet_7xywe")
 y_sort_enabled = true
 tile_set = SubResource("TileSet_ejqi6")
 
+[node name="DesertWallsLayer" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_8xtyv")
+
 [node name="Carl" parent="." instance=ExtResource("3_hd5y1")]
 y_sort_enabled = true
 position = Vector2(516, 277)
@@ -1493,3 +1504,21 @@ player_location = Vector2(926, 146)
 
 [node name="PlayerPortalLocation" type="Marker2D" parent="."]
 position = Vector2(324, 535)
+
+[node name="Portal Door" parent="." instance=ExtResource("5_fo7aw")]
+position = Vector2(523, 995)
+button_pressed_needed = 2
+
+[node name="PuzzleButton" parent="." instance=ExtResource("6_8bvq6")]
+position = Vector2(366, 528)
+
+[node name="PuzzleButton2" parent="." instance=ExtResource("6_8bvq6")]
+position = Vector2(732, 1056)
+
+[node name="Block" parent="." groups=["Movable"] instance=ExtResource("7_twvtw")]
+position = Vector2(656, 518)
+gravity_scale = 0.0
+
+[node name="Block2" parent="." groups=["Movable"] instance=ExtResource("7_twvtw")]
+position = Vector2(656, 518)
+gravity_scale = 0.0
