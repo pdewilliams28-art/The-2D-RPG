@@ -31,3 +31,7 @@ func _on_body_exited(body: Node2D) -> void:
 	#play off animation
 	#shut the door	
 			unpressed.emit()
+
+
+func _on_puzzle_button_2_pressed() -> void:
+	pass # Replace with function body.

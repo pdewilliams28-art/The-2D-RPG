@@ -7,6 +7,12 @@ func _ready() -> void:
 	position = SceneManager.player_spawn_position
 
 func _physics_process(delta: float) -> void:
+	move_player()
+	push_blocks()
+	
+	move_and_slide()
+
+func move_player():
 	var move_vector: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = move_vector * move_speed
 	
@@ -19,8 +25,9 @@ func _physics_process(delta: float) -> void:
 	elif velocity.y < 0:
 		$AnimatedSprite2D.play("walk_up")
 	else:
-		$AnimatedSprite2D.stop	
-		
+		$AnimatedSprite2D.stop
+
+func push_blocks():
 	var collision: KinematicCollision2D = get_last_slide_collision()
 	if collision:
 			#get colliding node
@@ -30,4 +37,3 @@ func _physics_process(delta: float) -> void:
 			# make negative
 			var collision_normal: Vector2 = collision.get_normal()
 			collider_node.apply_central_force(-collision_normal * push_strength)
-	move_and_slide()

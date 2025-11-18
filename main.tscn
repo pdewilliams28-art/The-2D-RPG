@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://d1otxnlo5omjj"]
+[gd_scene load_steps=28 format=4 uid="uid://d1otxnlo5omjj"]
 
 [ext_resource type="PackedScene" uid="uid://cti3ucywnp0fo" path="res://carl.tscn" id="1_3c43k"]
 [ext_resource type="Script" path="res://main.gd" id="1_hhnjb"]
@@ -2720,6 +2720,18 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_uc1tp")
 sources/1 = SubResource("TileSetAtlasSource_b8lbx")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8g38q"]
+size = Vector2(33, 247)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lh5xm"]
+size = Vector2(20, 265)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epqbl"]
+size = Vector2(494, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1fk87"]
+size = Vector2(503, 32)
+
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_hhnjb")
@@ -2744,13 +2756,16 @@ tile_set = SubResource("TileSet_bo4p7")
 [node name="Carl" parent="." groups=["Movable"] instance=ExtResource("1_3c43k")]
 y_sort_enabled = true
 position = Vector2(516, 277)
+collision_layer = 2
+collision_mask = 4
 
 [node name="Camera2D" type="Camera2D" parent="Carl"]
 zoom = Vector2(2.5, 2.5)
 
 [node name="Portal" parent="." instance=ExtResource("7_dhmpn")]
+collision_mask = 2
 next_scene = "res://2_nd_level.tscn"
-player_location = Vector2(324, 535)
+player_location = Vector2(98, 549)
 
 [node name="PlayerPortalLocation" type="Marker2D" parent="."]
 position = Vector2(926, 146)
@@ -2759,6 +2774,8 @@ position = Vector2(926, 146)
 
 [node name="Block" parent="." groups=["Movable"] instance=ExtResource("9_oox41")]
 position = Vector2(656, 518)
+collision_layer = 4
+collision_mask = 15
 gravity_scale = 0.0
 
 [node name="PuzzleButton" parent="." instance=ExtResource("10_b4tau")]
@@ -2766,6 +2783,27 @@ position = Vector2(366, 528)
 
 [node name="Portal Door" parent="." instance=ExtResource("11_xirch")]
 position = Vector2(523, 995)
+collision_mask = 6
+
+[node name="BlockStopper" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlockStopper"]
+position = Vector2(260.5, 522.5)
+shape = SubResource("RectangleShape2D_8g38q")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="BlockStopper"]
+position = Vector2(725, 513.5)
+shape = SubResource("RectangleShape2D_lh5xm")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="BlockStopper"]
+position = Vector2(481, 625.5)
+shape = SubResource("RectangleShape2D_epqbl")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="BlockStopper"]
+position = Vector2(467.5, 448)
+shape = SubResource("RectangleShape2D_1fk87")
 
 [connection signal="pressed" from="PuzzleButton" to="Portal Door" method="_on_puzzle_button_pressed"]
 [connection signal="unpressed" from="PuzzleButton" to="Portal Door" method="_on_puzzle_button_unpressed"]
