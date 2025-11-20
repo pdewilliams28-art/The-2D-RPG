@@ -2717,6 +2717,7 @@ texture = ExtResource("5_86ab0")
 
 [sub_resource type="TileSet" id="TileSet_bo4p7"]
 physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 7
 sources/0 = SubResource("TileSetAtlasSource_uc1tp")
 sources/1 = SubResource("TileSetAtlasSource_b8lbx")
 
@@ -2757,7 +2758,7 @@ tile_set = SubResource("TileSet_bo4p7")
 y_sort_enabled = true
 position = Vector2(516, 277)
 collision_layer = 2
-collision_mask = 4
+collision_mask = 7
 
 [node name="Camera2D" type="Camera2D" parent="Carl"]
 zoom = Vector2(2.5, 2.5)

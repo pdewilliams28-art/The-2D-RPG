@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://dyj2d04oh332q"]
+[gd_scene load_steps=24 format=4 uid="uid://dyj2d04oh332q"]
 
 [ext_resource type="Texture2D" uid="uid://bw7sj40cptfp7" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetDesert.png" id="1_c3ukl"]
 [ext_resource type="Texture2D" uid="uid://b6jm8laltqdux" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetFloor.png" id="2_yguxe"]
@@ -1510,12 +1510,17 @@ texture = ExtResource("1_c3ukl")
 19:11/0 = 0
 6:0/size_in_atlas = Vector2i(4, 3)
 6:0/0 = 0
+6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-27.2236, -18.5616, 26.8701, -18.5616, 27.9307, 21.7435, -27.9307, 20.6829)
 8:7/size_in_atlas = Vector2i(2, 2)
 8:7/0 = 0
+8:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-14.1421, -12.1976, 15.5563, -13.2583, 14.1421, 12.1976, -14.1421, 12.1976)
 10:7/size_in_atlas = Vector2i(4, 3)
 10:7/0 = 0
+10:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-14.8493, -8.3085, 13.7886, -10.0763, 19.4454, 15.026, -16.2635, 15.3796)
 
 [sub_resource type="TileSet" id="TileSet_ejqi6"]
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 7
 sources/0 = SubResource("TileSetAtlasSource_d6q5f")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_icr36"]
@@ -1932,6 +1937,18 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.666707, 0.150317, 0.341232, 1)
 sources/0 = SubResource("TileSetAtlasSource_8sr70")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1qrxb"]
+size = Vector2(33, 247)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wn4am"]
+size = Vector2(20, 265)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wa2n7"]
+size = Vector2(494, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d72ub"]
+size = Vector2(493.5, 36)
+
 [node name="2ndLevel" type="Node2D"]
 y_sort_enabled = true
 
@@ -1946,6 +1963,7 @@ tile_set = SubResource("TileSet_7xywe")
 
 [node name="DesertTownLayer" type="TileMapLayer" parent="."]
 y_sort_enabled = true
+tile_map_data = PackedByteArray("AAAyABQAAAAGAAAAAAA5ABQAAAAIAAcAAABCABUAAAAKAAcAAAA=")
 tile_set = SubResource("TileSet_ejqi6")
 
 [node name="DesertWallsLayer" type="TileMapLayer" parent="."]
@@ -1955,6 +1973,8 @@ tile_set = SubResource("TileSet_8xtyv")
 [node name="Carl" parent="." instance=ExtResource("3_hd5y1")]
 y_sort_enabled = true
 position = Vector2(516, 277)
+collision_layer = 2
+collision_mask = 7
 
 [node name="Camera2D" type="Camera2D" parent="Carl"]
 zoom = Vector2(2.5, 2.5)
@@ -1968,25 +1988,45 @@ player_location = Vector2(926, 146)
 position = Vector2(98, 549)
 
 [node name="Portal Door" parent="." instance=ExtResource("5_fo7aw")]
-position = Vector2(229, 716)
+position = Vector2(758, 787)
 button_pressed_needed = 2
 
 [node name="PuzzleButton" parent="." instance=ExtResource("6_8bvq6")]
-position = Vector2(366, 528)
+position = Vector2(520, 701)
 
 [node name="PuzzleButton2" parent="." instance=ExtResource("6_8bvq6")]
-position = Vector2(305, 732)
+position = Vector2(415, 709)
 
 [node name="Block" parent="." groups=["Movable"] instance=ExtResource("7_twvtw")]
-position = Vector2(656, 518)
+position = Vector2(465, 693)
 gravity_scale = 0.0
 
 [node name="Block2" parent="." groups=["Movable"] instance=ExtResource("7_twvtw")]
-position = Vector2(656, 518)
+position = Vector2(631, 686)
 gravity_scale = 0.0
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_d4tts")
+
+[node name="BlockStopper" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlockStopper"]
+position = Vector2(260.5, 522.5)
+shape = SubResource("RectangleShape2D_1qrxb")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="BlockStopper"]
+position = Vector2(725, 513.5)
+shape = SubResource("RectangleShape2D_wn4am")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="BlockStopper"]
+position = Vector2(481, 625.5)
+shape = SubResource("RectangleShape2D_wa2n7")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="BlockStopper"]
+position = Vector2(777, 766)
+shape = SubResource("RectangleShape2D_d72ub")
 
 [connection signal="pressed" from="PuzzleButton" to="Portal Door" method="_on_puzzle_button_pressed"]
 [connection signal="unpressed" from="PuzzleButton" to="Portal Door" method="_on_puzzle_button_unpressed"]

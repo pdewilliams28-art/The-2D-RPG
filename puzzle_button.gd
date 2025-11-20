@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	print("aaahhh")
 	bodies_on_button += 1
-	if body.is_in_group("movable") or body is Player:
+	if body.is_in_group("Movable") or body is Player:
 		if bodies_on_button == 1:
 	#play animation
 	#open a door by sneding a signal
@@ -25,7 +25,7 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_body_exited(body: Node2D) -> void:
 	print("airrr")
 	bodies_on_button -= 1
-	if body.is_in_group("movable") or body is Player:
+	if body.is_in_group("Movable") or body is Player:
 		if bodies_on_button == 0:
 			$AnimatedSprite2D.play("Off")
 	#play off animation
