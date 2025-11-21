@@ -5,7 +5,7 @@ class_name Player
 #TODO figure out why player goes with block when pushing down
 func _ready() -> void:
 	position = SceneManager.player_spawn_position
-
+	SceneManager.player_hp = 3
 func _physics_process(delta: float) -> void:
 	move_player()
 	push_blocks()
@@ -37,3 +37,14 @@ func push_blocks():
 			# make negative
 			var collision_normal: Vector2 = collision.get_normal()
 			collider_node.apply_central_force(-collision_normal * push_strength)
+
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	SceneManager.player_hp -= 1
+	print(SceneManager.player_hp)
+	# die function reint scene
+	if SceneManager.player_hp <= 0:
+		die()
+	
+func die():
+	get_tree().call_deferred("reload_current_scene")

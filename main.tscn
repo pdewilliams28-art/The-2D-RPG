@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://d1otxnlo5omjj"]
+[gd_scene load_steps=29 format=4 uid="uid://d1otxnlo5omjj"]
 
 [ext_resource type="PackedScene" uid="uid://cti3ucywnp0fo" path="res://carl.tscn" id="1_3c43k"]
 [ext_resource type="Script" path="res://main.gd" id="1_hhnjb"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dxwhatu6b1sne" path="res://block.tscn" id="9_oox41"]
 [ext_resource type="PackedScene" uid="uid://dfh67sopqhs6i" path="res://puzzle_button.tscn" id="10_b4tau"]
 [ext_resource type="PackedScene" uid="uid://cp8hkxrj12hnr" path="res://portal_door.tscn" id="11_xirch"]
+[ext_resource type="PackedScene" uid="uid://p2ltnwjp88oa" path="res://eney.tscn" id="12_p0adi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5mrlu"]
 texture = ExtResource("1_to8xh")
@@ -2805,6 +2806,9 @@ shape = SubResource("RectangleShape2D_epqbl")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="BlockStopper"]
 position = Vector2(467.5, 448)
 shape = SubResource("RectangleShape2D_1fk87")
+
+[node name="Eney" parent="." instance=ExtResource("12_p0adi")]
+position = Vector2(136, 216)
 
 [connection signal="pressed" from="PuzzleButton" to="Portal Door" method="_on_puzzle_button_pressed"]
 [connection signal="unpressed" from="PuzzleButton" to="Portal Door" method="_on_puzzle_button_unpressed"]

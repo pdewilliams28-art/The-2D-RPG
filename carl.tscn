@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cti3ucywnp0fo"]
+[gd_scene load_steps=22 format=3 uid="uid://cti3ucywnp0fo"]
 
 [ext_resource type="Script" path="res://carl.gd" id="1_kql7p"]
 [ext_resource type="Texture2D" uid="uid://bjroggncp1nbk" path="res://Ninja Adventure - Asset Pack/Actor/Characters/Boy/SeparateAnim/Walk.png" id="2_sag5e"]
@@ -142,6 +142,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_0b7yh"]
+radius = 6.08276
+
 [node name="Carl" type="CharacterBody2D"]
 z_index = 1
 script = ExtResource("1_kql7p")
@@ -153,4 +156,14 @@ shape = SubResource("CapsuleShape2D_2gtdf")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2, 0)
 sprite_frames = SubResource("SpriteFrames_vo3pt")
-animation = &"walk_up"
+animation = &"walk_down"
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-2, 0)
+shape = SubResource("CircleShape2D_0b7yh")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

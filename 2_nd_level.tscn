@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://dyj2d04oh332q"]
+[gd_scene load_steps=25 format=4 uid="uid://dyj2d04oh332q"]
 
 [ext_resource type="Texture2D" uid="uid://bw7sj40cptfp7" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetDesert.png" id="1_c3ukl"]
 [ext_resource type="Texture2D" uid="uid://b6jm8laltqdux" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetFloor.png" id="2_yguxe"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dfh67sopqhs6i" path="res://puzzle_button.tscn" id="6_8bvq6"]
 [ext_resource type="PackedScene" uid="uid://dxwhatu6b1sne" path="res://block.tscn" id="7_twvtw"]
 [ext_resource type="Texture2D" uid="uid://brb6umhtvap5o" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/Interior/TilesetWallSimple.png" id="8_tkhh0"]
+[ext_resource type="PackedScene" uid="uid://p2ltnwjp88oa" path="res://eney.tscn" id="9_ovdui"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mfty1"]
 texture = ExtResource("1_c3ukl")
@@ -2027,6 +2028,10 @@ shape = SubResource("RectangleShape2D_wa2n7")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="BlockStopper"]
 position = Vector2(777, 766)
 shape = SubResource("RectangleShape2D_d72ub")
+
+[node name="Eney" parent="." instance=ExtResource("9_ovdui")]
+position = Vector2(470, 1301)
+motion_mode = 1
 
 [connection signal="pressed" from="PuzzleButton" to="Portal Door" method="_on_puzzle_button_pressed"]
 [connection signal="unpressed" from="PuzzleButton" to="Portal Door" method="_on_puzzle_button_unpressed"]
