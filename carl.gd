@@ -2,10 +2,18 @@ extends CharacterBody2D
 class_name Player
 @export var move_speed: float = 100.0
 @export var push_strength: float = 140.0
+@export var acceleration: float = 10.0
 #TODO figure out why player goes with block when pushing down
 func _ready() -> void:
 	position = SceneManager.player_spawn_position
-	SceneManager.player_hp = 3
+	$Weapon.visible = false
+	%Weapon_area.monitoring = false
+	
+	
+func _process(delta:float):
+	if Input.is_action_just_pressed("interact"):
+		attack()
+		
 func _physics_process(delta: float) -> void:
 	move_player()
 	push_blocks()
@@ -14,7 +22,8 @@ func _physics_process(delta: float) -> void:
 
 func move_player():
 	var move_vector: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	velocity = move_vector * move_speed
+	
+	velocity = velocity.move_toward(move_vector * move_speed, acceleration)
 	
 	if velocity.x > 0:
 		$AnimatedSprite2D.play("walk_right")
@@ -38,6 +47,12 @@ func push_blocks():
 			var collision_normal: Vector2 = collision.get_normal()
 			collider_node.apply_central_force(-collision_normal * push_strength)
 
+func attack():
+	#show the weapon, somewhere hide the weapon
+	$Weapon.visible = true
+	#turn collision on and off
+	%Weapon_area.monitoring = true
+	$Weapon_Timer.start()
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	SceneManager.player_hp -= 1
@@ -45,6 +60,30 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 	# die function reint scene
 	if SceneManager.player_hp <= 0:
 		die()
+	#pushback
+	var distance_to_player: Vector2
+	distance_to_player = global_position - body.global_position
+	var knockback_direction: Vector2 = distance_to_player.normalized()
+	var knockback_strength: float = 700
+	velocity += knockback_direction * knockback_strength
+	
 	
 func die():
+	SceneManager.player_hp = 3
 	get_tree().call_deferred("reload_current_scene")
+
+
+func _on_weapon_area_body_entered(body: Node2D) -> void:
+	#subtract 1 from hp, add hp to enemy
+	body.hp -= 1
+	if body.hp <= 0:
+		body.queue_free()
+	
+	pass # Replace with function body.
+
+
+func _on_weapon_timer_timeout() -> void:
+	#show the weapon, somewhere hide the weapon
+	$Weapon.visible = false
+	#turn collision on and off
+	%Weapon_area.monitoring = false

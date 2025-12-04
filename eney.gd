@@ -2,6 +2,7 @@ extends CharacterBody2D
 ### TODO : have enmey forget target after they have escaped for a while.
 ### fatigue, sliding physics
 @export var speed: float = 50.0
+@export var hp:int = 3
 #what to chase
 var target: Node2D
 

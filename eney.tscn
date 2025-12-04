@@ -7,8 +7,8 @@
 radius = 69.029
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_br4lj"]
-radius = 8.0
-height = 18.0
+radius = 12.0
+height = 24.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r82et"]
 atlas = ExtResource("2_yjqii")
@@ -180,8 +180,9 @@ shape = SubResource("CircleShape2D_6s0u3")
 shape = SubResource("CapsuleShape2D_br4lj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -4)
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_4dafh")
-animation = &"right"
-frame_progress = 0.238413
+animation = &"up"
 
 [connection signal="body_entered" from="ChasingRadius" to="." method="_on_chasing_radius_body_entered"]

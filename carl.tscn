@@ -1,10 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://cti3ucywnp0fo"]
+[gd_scene load_steps=24 format=3 uid="uid://cti3ucywnp0fo"]
 
 [ext_resource type="Script" path="res://carl.gd" id="1_kql7p"]
 [ext_resource type="Texture2D" uid="uid://bjroggncp1nbk" path="res://Ninja Adventure - Asset Pack/Actor/Characters/Boy/SeparateAnim/Walk.png" id="2_sag5e"]
+[ext_resource type="Texture2D" uid="uid://dekc1proyk61w" path="res://Ninja Adventure - Asset Pack/Items/Weapons/Fork/Sprite.png" id="3_h1nd4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2gtdf"]
-radius = 8.0
 height = 20.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7tvve"]
@@ -142,11 +142,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0b7yh"]
-radius = 6.08276
+[sub_resource type="CircleShape2D" id="CircleShape2D_7uv13"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i305m"]
+size = Vector2(8, 22)
 
 [node name="Carl" type="CharacterBody2D"]
 z_index = 1
+collision_mask = 17
 script = ExtResource("1_kql7p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -164,6 +167,25 @@ collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(-2, 0)
-shape = SubResource("CircleShape2D_0b7yh")
+shape = SubResource("CircleShape2D_7uv13")
+
+[node name="Weapon" type="Sprite2D" parent="."]
+position = Vector2(0, -14)
+texture = ExtResource("3_h1nd4")
+
+[node name="Weapon_area" type="Area2D" parent="Weapon"]
+unique_name_in_owner = true
+collision_layer = 2
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon/Weapon_area"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_i305m")
+
+[node name="Weapon_Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_entered" from="Weapon/Weapon_area" to="." method="_on_weapon_area_body_entered"]
+[connection signal="timeout" from="Weapon_Timer" to="." method="_on_weapon_timer_timeout"]
