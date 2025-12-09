@@ -1,11 +1,28 @@
-[gd_scene load_steps=24 format=3 uid="uid://cti3ucywnp0fo"]
+[gd_scene load_steps=32 format=3 uid="uid://cti3ucywnp0fo"]
 
 [ext_resource type="Script" path="res://carl.gd" id="1_kql7p"]
+[ext_resource type="Texture2D" uid="uid://c42ai5etbs0oi" path="res://Ninja Adventure - Asset Pack/Actor/Characters/Boy/SeparateAnim/Attack.png" id="2_qqdnv"]
 [ext_resource type="Texture2D" uid="uid://bjroggncp1nbk" path="res://Ninja Adventure - Asset Pack/Actor/Characters/Boy/SeparateAnim/Walk.png" id="2_sag5e"]
 [ext_resource type="Texture2D" uid="uid://dekc1proyk61w" path="res://Ninja Adventure - Asset Pack/Items/Weapons/Fork/Sprite.png" id="3_h1nd4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2gtdf"]
 height = 20.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yiiyq"]
+atlas = ExtResource("2_qqdnv")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3gbg"]
+atlas = ExtResource("2_qqdnv")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7nfbt"]
+atlas = ExtResource("2_qqdnv")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tsr1g"]
+atlas = ExtResource("2_qqdnv")
+region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7tvve"]
 atlas = ExtResource("2_sag5e")
@@ -73,6 +90,38 @@ region = Rect2(16, 48, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vo3pt"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yiiyq")
+}],
+"loop": true,
+"name": &"attack_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3gbg")
+}],
+"loop": true,
+"name": &"attack_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7nfbt")
+}],
+"loop": true,
+"name": &"attack_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tsr1g")
+}],
+"loop": true,
+"name": &"attack_up",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7tvve")
@@ -143,9 +192,95 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7uv13"]
+radius = 6.32456
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i305m"]
 size = Vector2(8, 22)
+
+[sub_resource type="Animation" id="Animation_wqtx3"]
+resource_name = "swing_up"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.0333333, 0, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-5, -13), Vector2(-10, -8), Vector2(-7, -10)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.652753, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(-0.1, 0, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 0.9375), Vector2(0.3, 0.281), Vector2(1, 0.937)]
+}
+
+[sub_resource type="Animation" id="Animation_7grkm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5, -13)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 0.9375)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xr6nr"]
+_data = {
+"RESET": SubResource("Animation_7grkm"),
+"swing_up": SubResource("Animation_wqtx3")
+}
 
 [node name="Carl" type="CharacterBody2D"]
 z_index = 1
@@ -159,7 +294,7 @@ shape = SubResource("CapsuleShape2D_2gtdf")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2, 0)
 sprite_frames = SubResource("SpriteFrames_vo3pt")
-animation = &"walk_down"
+animation = &"attack_up"
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 2
@@ -170,7 +305,8 @@ position = Vector2(-2, 0)
 shape = SubResource("CircleShape2D_7uv13")
 
 [node name="Weapon" type="Sprite2D" parent="."]
-position = Vector2(0, -14)
+position = Vector2(-5, -13)
+scale = Vector2(1, 0.9375)
 texture = ExtResource("3_h1nd4")
 
 [node name="Weapon_area" type="Area2D" parent="Weapon"]
@@ -179,12 +315,17 @@ collision_layer = 2
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon/Weapon_area"]
-position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_i305m")
 
 [node name="Weapon_Timer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Weapon")
+libraries = {
+"": SubResource("AnimationLibrary_xr6nr")
+}
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_entered" from="Weapon/Weapon_area" to="." method="_on_weapon_area_body_entered"]

@@ -166,7 +166,7 @@ animations = [{
 
 [node name="Eney" type="CharacterBody2D"]
 collision_layer = 16
-collision_mask = 3
+collision_mask = 5
 script = ExtResource("1_eouu2")
 
 [node name="ChasingRadius" type="Area2D" parent="."]

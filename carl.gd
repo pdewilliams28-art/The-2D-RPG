@@ -3,6 +3,10 @@ class_name Player
 @export var move_speed: float = 100.0
 @export var push_strength: float = 140.0
 @export var acceleration: float = 10.0
+
+
+var is_attacking: bool = false
+
 #TODO figure out why player goes with block when pushing down
 func _ready() -> void:
 	position = SceneManager.player_spawn_position
@@ -15,16 +19,17 @@ func _process(delta:float):
 		attack()
 		
 func _physics_process(delta: float) -> void:
-	move_player()
+	if not is_attacking:
+		move_player()
 	push_blocks()
 	
 	move_and_slide()
-
+	
 func move_player():
 	var move_vector: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
 	velocity = velocity.move_toward(move_vector * move_speed, acceleration)
-	
+
 	if velocity.x > 0:
 		$AnimatedSprite2D.play("walk_right")
 	elif velocity.x < 0:
@@ -49,10 +54,25 @@ func push_blocks():
 
 func attack():
 	#show the weapon, somewhere hide the weapon
+	is_attacking = true
+	velocity = Vector2.ZERO
 	$Weapon.visible = true
 	#turn collision on and off
 	%Weapon_area.monitoring = true
 	$Weapon_Timer.start()
+	#check what animation is playing
+	var player_animation: String = $AnimatedSprite2D.animation
+	if player_animation == "walk_right":
+		$AnimatedSprite2D.play("attack_right")
+	elif player_animation == "walk_left":
+		$AnimatedSprite2D.play("attack_left")
+	elif player_animation == "walk_up":
+		$AnimatedSprite2D.play("attack_up")
+		$AnimationPlayer.play("swing_up")
+	elif player_animation == "walk_down":
+		$AnimatedSprite2D.play("attack_down")
+		
+
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	SceneManager.player_hp -= 1
@@ -84,6 +104,17 @@ func _on_weapon_area_body_entered(body: Node2D) -> void:
 
 func _on_weapon_timer_timeout() -> void:
 	#show the weapon, somewhere hide the weapon
+	is_attacking = false
 	$Weapon.visible = false
 	#turn collision on and off
 	%Weapon_area.monitoring = false
+	#check what animation is playing
+	var player_animation: String = $AnimatedSprite2D.animation
+	if player_animation == "attack_right":
+		$AnimatedSprite2D.play("walk_right")
+	elif player_animation == "attack_left":
+		$AnimatedSprite2D.play("walk_left")
+	elif player_animation == "attack_up":
+		$AnimatedSprite2D.play("walk_up")
+	elif player_animation == "attack_down":
+		$AnimatedSprite2D.play("walk_down")
